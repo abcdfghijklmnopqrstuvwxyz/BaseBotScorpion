@@ -1,0 +1,198 @@
+╔════════════════════════════════════════╗
+║     🦂 BaseBotScorpion - TUTORIAL      ║
+║         Rodar Bot no Termux            ║
+║         Criado por: 🦂⃟Th               ║
+╚══════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📱 O QUE É O TERMUX?
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Termux é um app de terminal pra Android.
+Com ele você roda o bot direto no celular,
+sem precisar de PC ou servidor pago.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📥 PASSO 1 - INSTALAR O TERMUX
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚠️  NÃO instale pela Play Store!
+    A versão de lá é desatualizada.
+
+✅ Instale pela F-Droid:
+   https://f-droid.org/packages/com.termux/
+
+Ou baixe o APK direto:
+   https://github.com/termux/termux-app/releases
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ⚙️  PASSO 2 - PREPARAR O TERMUX
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Abra o Termux e cole esses comandos
+um por um (aguarde cada um terminar):
+
+1️⃣  Atualizar pacotes:
+pkg update -y && pkg upgrade -y
+
+2️⃣  Instalar o Node.js:
+pkg install nodejs -y
+
+3️⃣  Instalar o git (pra baixar arquivos):
+pkg install git -y
+
+4️⃣  Dar permissão de acesso ao armazenamento:
+termux-setup-storage
+
+   → Aparecerá um pop-up, clique em PERMITIR
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📁 PASSO 3 - COLOCAR OS ARQUIVOS DO BOT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Você precisa dos arquivos:
+  • index.js
+  • package.json
+
+Opção A — Pelo celular (mais fácil):
+  1. Crie uma pasta chamada "MeuBot" no
+     armazenamento interno do celular
+  2. Coloque o index.js e package.json lá
+  3. No Termux, acesse a pasta:
+
+cd /sdcard/MeuBot
+
+Opção B — Criar direto no Termux:
+  1. Criar a pasta:
+mkdir ~/MeuBot && cd ~/MeuBot
+
+  2. Criar o package.json:
+nano package.json
+
+     Cole o conteúdo do arquivo,
+     depois: CTRL+X → Y → Enter pra salvar
+
+  3. Criar o index.js:
+nano index.js
+
+     Cole o conteúdo do arquivo,
+     depois: CTRL+X → Y → Enter pra salvar
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📦 PASSO 4 - INSTALAR AS DEPENDÊNCIAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Dentro da pasta do bot, rode:
+
+npm install --no-bin-links
+
+⚠️  Use SEMPRE o --no-bin-links no Android!
+    Sem ele dá erro de permissão (EACCES).
+
+Aguarde baixar tudo (pode demorar alguns
+minutos dependendo da internet).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🚀 PASSO 5 - INICIAR O BOT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+node index.js
+
+O bot vai perguntar o método de conexão:
+
+  [1] QR Code  → Escanear com a câmera
+  [2] Código   → Código de 8 dígitos
+
+👉 Recomendamos o [2] Código no celular,
+   pois o QR Code pode ficar pequeno
+   demais na tela do Termux.
+
+Se escolher [2]:
+  • Digite o número com DDI (ex: 5511999999999)
+  • Abra o WhatsApp → Configurações
+    → Aparelhos Conectados
+    → Conectar com número de telefone
+  • Digite o código que aparecer no Termux
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🔋 PASSO 6 - MANTER O BOT RODANDO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+O Android mata apps em segundo plano.
+Para evitar que o bot pare:
+
+1. Vá nas configurações do celular
+2. Procure "Bateria" → "Otimização de bateria"
+   (ou "Economia de energia")
+3. Encontre o Termux e selecione
+   "Não otimizar" ou "Sem restrições"
+
+Ou use o comando no Termux pra manter ativo:
+
+termux-wake-lock
+
+Digite esse comando ANTES de minimizar
+o Termux. Isso evita que o Android
+suspenda o processo.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  ❌ ERROS COMUNS E SOLUÇÕES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🔴 Erro: EACCES / permission denied
+   Solução:
+   npm install --no-bin-links
+
+🔴 Erro: node: command not found
+   Solução:
+   pkg install nodejs -y
+
+🔴 Bot parou sozinho / desconectou:
+   Solução: rode novamente:
+   node index.js
+
+🔴 QR Code expirou:
+   Solução: pressione CTRL+C e rode
+   node index.js novamente
+
+🔴 Código de pareamento expirou:
+   Solução: delete a sessão e reinicie:
+   rm -rf auth_info && node index.js
+
+🔴 Termux fecha sozinho:
+   Solução: desative otimização de bateria
+   para o Termux (veja Passo 6)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  💡 DICAS EXTRAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+• Deslize da esquerda pra direita no Termux
+  para abrir múltiplas sessões (abas)
+
+• Para parar o bot: CTRL + C
+
+• Para limpar a tela: clear
+
+• Para ver os arquivos da pasta: ls
+
+• Para entrar numa pasta: cd nomeDaPasta
+
+• Para voltar uma pasta: cd ..
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  📋 RESUMO RÁPIDO (copie e salve)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+pkg update -y && pkg upgrade -y
+pkg install nodejs git -y
+termux-setup-storage
+cd /sdcard/MeuBot
+npm install --no-bin-links
+termux-wake-lock
+node index.js
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  🦂 Criado por: 🦂⃟Th
+  📱 WhatsApp: +55 15 98153-5755
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
