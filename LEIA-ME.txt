@@ -1,0 +1,168 @@
+╔══════════════════════════════════════════════════════════════╗
+║              BASE BOT SCORPION - GUIA COMPLETO                 ║
+║                   Powered by Baileys                         ║
+╚══════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  PRÉ-REQUISITOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  • Node.js versão 18 ou superior
+    Verifique com: node --version
+    Download: https://nodejs.org
+
+  • npm (vem junto com o Node.js)
+    Verifique com: npm --version
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  1. CONFIGURAÇÃO INICIAL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Abra o arquivo index.js e edite o bloco CONFIG no topo:
+
+    const CONFIG = {
+      prefixo: '!',                // Mude se quiser (ex: '/', '#')
+      numeroDono: '5511999999999', // SEU número com DDI, só dígitos
+      nomeDono: 'Dono do Bot',     // Seu nome
+      nomeBot: 'MeuBot',           // Nome do bot
+    };
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  2. INSTALAR DEPENDÊNCIAS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Abra o terminal na pasta do projeto e rode:
+
+    npm install
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  3. INICIAR O BOT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+    node index.js
+
+  Ao iniciar, o bot pergunta qual método de conexão usar:
+
+    [1] QR Code  → Escanear com a câmera do celular
+    [2] Código   → Digitar código de 8 dígitos no WhatsApp
+
+  Digite 1 ou 2 e pressione Enter.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  4. MÉTODOS DE CONEXÃO (detalhes)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ── Opção 1: QR Code ────────────────────────────────────────
+
+  Um QR Code aparece no terminal.
+
+  No celular:
+    WhatsApp → Configurações → Aparelhos Conectados
+    → Conectar um aparelho → Escaneie o QR Code
+
+  ── Opção 2: Código de Pareamento ───────────────────────────
+
+  O terminal exibe um código de 8 dígitos (ex: ABCD-1234).
+  O número usado é o numeroDono do CONFIG.
+
+  No celular:
+    WhatsApp → Configurações → Aparelhos Conectados
+    → Conectar um aparelho → Conectar com número de telefone
+    → Digite o código exibido no terminal
+
+  ⚠️  Observações importantes sobre o Código de Pareamento:
+    • O número do CONFIG.numeroDono DEVE ser o número do WhatsApp
+      que você vai usar para conectar o bot.
+    • O código expira em ~60 segundos. Se expirar, reinicie o bot.
+    • Funciona melhor em contas pessoais (não Business).
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  5. COMANDOS DISPONÍVEIS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  !menu  → Exibe todos os comandos disponíveis
+  !ping  → Responde com "Pong" e o tempo de resposta
+  !dono  → Mostra o número e nome do dono do bot
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  6. COMO ADICIONAR NOVOS COMANDOS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  Abra index.js e encontre o bloco switch(comando).
+  Adicione seu comando ANTES da linha "default:":
+
+  ┌─────────────────────────────────────────────────────────┐
+  │                                                         │
+  │   case 'oi':                                            │
+  │     await responder('Olá! Como posso te ajudar? 😊');   │
+  │     break;                                              │
+  │                                                         │
+  └─────────────────────────────────────────────────────────┘
+
+  Mais exemplos prontos:
+
+  ── Resposta simples ─────────────────────────────────────────
+
+    case 'oi':
+      await responder('Olá! 😊');
+      break;
+
+  ── Com formatação ────────────────────────────────────────────
+
+    case 'info':
+      await responder(
+        '📌 *Informações do Bot*\n\n' +
+        'Nome: MeuBot\n' +
+        'Versão: 1.0.0'
+      );
+      break;
+
+  ── Com argumentos ────────────────────────────────────────────
+
+    case 'repetir':
+      if (args.length === 0) {
+        await responder('⚠️ Digite algo após !repetir');
+      } else {
+        await responder('🔁 ' + args.join(' '));
+      }
+      break;
+
+  Após editar: salve o arquivo e reinicie o bot com node index.js
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  7. ESTRUTURA DO PROJETO
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  whatsapp-bot/
+  ├── index.js          ← Todo o código (edite aqui)
+  ├── package.json      ← Dependências
+  ├── LEIA-ME.txt       ← Este arquivo
+  └── auth_info/        ← Criada automaticamente (sessão)
+
+  ⚠️  NÃO delete a pasta auth_info com o bot rodando.
+      Se quiser trocar de conta: pare o bot, delete a pasta,
+      e rode node index.js novamente.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  8. PROBLEMAS COMUNS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ❌ QR Code expirou:
+     → Reinicie com node index.js e escaneie rápido.
+
+  ❌ Código de pareamento não aparece:
+     → Verifique se o numeroDono está correto no CONFIG.
+     → Reinicie o bot e tente novamente.
+
+  ❌ Código de pareamento expirou:
+     → Delete a pasta auth_info/ e reinicie o bot.
+
+  ❌ "Sessão encerrada. Delete a pasta auth_info e reinicie."
+     → Apague a pasta auth_info/ e rode node index.js.
+
+  ❌ Erro de versão do Node.js:
+     → Atualize para Node.js 18+: https://nodejs.org
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  Bom uso! 🤖
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
